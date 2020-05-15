@@ -1,0 +1,106 @@
+{% extends 'basic.html'%}
+{% block css%}
+<style>
+    
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 10vh;
+
+    }
+
+    .typesection {
+        background-color: transparent;
+        border: 0px;
+        outline: none;
+        border-bottom: 2px solid black;
+        width: 50%;
+        min-height: 10vh;
+    }
+    .cross{
+        text-decoration: line-through;
+        transition: all 1s ease-in;
+    }
+</style>
+{% endblock%}
+{% block body%}
+<div class="container">
+    <h6>{{name}}</h6>
+</div>
+<div class="container mt-4">
+    <form action="/todo/notes/" method="POST">
+        <div class="main">{% csrf_token %}
+            <textarea class="typesection" wrap='on' name='note' id='notes' rows="1"></textarea>
+            <button type="submit" class="btn btn-primary todo mx-4"> To Do</button>
+            <a href="/todo/deleteall/" class="btn-danger btn"> Delete All</a>
+        </div>
+    </form>
+
+    {% for massage in messages %}
+<div class="alert alert-{{massage.tags}} alert-dismissible fade  show mt-2" id='alertbadge' role="alert" style="color:white;background: linear-gradient(to right, rgb(35, 7, 77), rgb(204, 83, 51));">
+  <strong>done bro!</strong> {{massage}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+    <hr>
+    <div class="col-6 offset-3 shadow-md">
+    <ul class="list-group ">
+
+        {% for todo in notes%}
+        {% if todo.note_saved %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {% if todo.note_cross %}
+             <span class="cross">{{todo.note}} <sub>({{todo.date}})</sub></span> 
+             <a href="/todo/uncross/{{todo.note_id}}" class="btn btn-danger ml-auto">uncross</a>
+             {% else%}
+             <span>{{todo.note}} <sub>({{todo.date}})</sub></span> 
+             <a href="/todo/cross/{{todo.note_id}}" class="btn btn-danger ml-auto">cross</a>
+
+             {% endif%}
+
+            <a class="btn btn-primary ml-2" href='/todo/delete/{{todo.note_id}}/'>delete</a>
+
+           
+        </li>
+        {% endif%}
+        {% endfor%}
+    </ul>
+</div>
+</div>
+{% endblock%}
+{% block script%}
+<script>
+    // $('#notes').focus(function () {
+    //     $('#notes').css('outline', 'none');
+    // })
+//     $('form').submit(function (event) {
+//    $('#notes').val('');})
+    //         var data = {
+    //             'note': $('#notes').val(),
+    //             'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+    //         };
+    //         $.ajax({
+    //             url: '/todo/notes/',
+    //             type: 'POST',
+    //             data: data,
+    //             endcode: true
+    //         }).done(function (data) {
+    //                 $('#notes').val('');
+    //                 console.log('ab')
+    //                 // window.location.assign('/todo/notes/');
+    //             });
+    //     }
+    //     else {
+    //         $('#notes').css('outline', 'red 2px solid')
+    //     } event.preventDefault();
+    // })
+
+
+
+</script>
+
+{% endblock%}

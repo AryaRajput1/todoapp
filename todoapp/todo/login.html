@@ -1,0 +1,30 @@
+{% extends 'basic.html'%}
+{% block css%}
+<style>
+
+
+</style>
+{% endblock%}
+{% block body%}
+<div class="container">
+<form method="POST" action="/todo/login/" class="col-6  offset-3 mt-5">{% csrf_token%}
+<div class="form-group ">
+    <label for="name">name </label>
+    <input type="name" name='name' class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter name">
+    
+  </div>
+  <div class="form-group">
+    <label for="password1">Enter Password</label>
+    <input type="password" name='password' class="form-control" id="password1" placeholder="Password">
+  </div><div class="text-center">
+  <a class="" href='#'> forgot password?</a></div>
+  <div class="text-center">
+  <button type="submit" class="btn btn-primary mt-4">SIGN IN</button></div>
+</form></div>
+{% endblock%}
+{% block script%}
+<script>
+    
+</script>
+
+{% endblock%}

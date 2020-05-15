@@ -1,0 +1,32 @@
+{% extends 'basic.html'%}
+{% block css%}
+{% endblock%}
+{% block body%}
+
+<div class="container">
+    
+<div class="row mt-5">
+<div class="col-6 offset-3 shadow-md">
+    <ul class ="list-group ">
+        {% for todo in notes%}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {% if todo.note_cross %}
+             <span class="cross">{{todo.note}} <sub>({{todo.date}})</sub></span> 
+             <a href="/todo/uncross/{{todo.note_id}}" class="btn btn-danger ml-auto">uncross</a>
+             {% else%}
+             <span>{{todo.note}} <sub>({{todo.date}})</sub></span> 
+             <a href="/todo/cross/{{todo.note_id}}" class="btn btn-danger ml-auto">cross</a>
+
+             {% endif%}
+
+            <a class="btn btn-primary ml-2" href='/todo/delete/{{todo.note_id}}/'>delete</a>
+
+           
+        </li>
+        
+        {% endfor%}
+</ul>
+</div>
+</div>
+</div>
+{% endblock%}

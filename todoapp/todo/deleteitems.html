@@ -1,0 +1,31 @@
+{% extends 'basic.html'%}
+{% block css%}
+{% endblock%}
+{% block body%}
+<div class="container ">
+    <div class="row justify-content-center mt-3">
+    <h4 class="" style="color:white;text-decoration: underline;text-transform: capitalize;"> Your deleteed notes permanent delete in 28 days</h4>
+</div>
+<div class="row justify-content-center mt-3">
+    <a href="/todo/notes/" class="btn btn-warning mx-3"> GO TO NOTES</a>
+    <a href="/todo/restoreall/" class="btn btn-primary mx-3"> restore all</a>
+    <a href="/todo/permanentdeleteall/" class="btn btn-danger mx-3">permanent delete all</a>
+</div>
+<div class="col-6 offset-3 mt-4">
+    <ul class="list-group">
+        
+        {% for todo in notes%}
+       
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+             <span>{{todo.note}} <sub>({{todo.date}})</sub></span> 
+              <a class="btn btn-danger ml-auto" href='/todo/permanentdelete/{{todo.note_id}}/'>permanent delete</a>
+              <a class="btn btn-secondary ml-2" href='/todo/restore/{{todo.note_id}}/'>restore</a>
+
+           
+        </li>
+        
+        {% endfor%}
+    </ul>
+</div>
+</div>
+{% endblock%}

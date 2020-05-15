@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% block css%}
+    {% endblock%}
+</head>
+
+<body style="background: linear-gradient(to right, rgb(252, 70, 107), rgb(63, 94, 251));">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="#">To Do</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/todo/home/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/todo/notes/">notes</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/todo/deleteitems/">Deleted Tasks</a>
+            </li>
+           {% if user.is_authenticated %}
+            <li class="nav-item active">
+              <a class="nav-link" href="/todo/logout/">logout</a>
+            </li>
+           {% else %}
+           <li class="nav-item active">
+            <a class="nav-link" href="/todo/signup/">signup</a>
+           </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/todo/login/">login</a>
+            </li>
+           {% endif %}
+           
+          </ul>
+          <form class="form-inline my-2 ml-2 my-lg-0" method="GET" action="/todo/search/">
+            <input class="form-control mr-sm-2" type="search" name='searchnote' placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    {% block body%}
+    {% endblock%}
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% block script%}
+{% endblock%}
+
+</html>
