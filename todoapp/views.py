@@ -158,16 +158,20 @@ def permanentdelete(request, id):
 
 
 def searchnote(request):
-   notename=request.GET.get('searchnote')
-   print(notename)
-   ab=[]
-   setnote=Notes.objects.filter(author=request.user,note_saved=True)
-   print(setnote)
-   for note in setnote:
-    print(note)
-    m=re.search(notename,note.note)
-    if m:
+   if(request.user.is_authenticated):
+    notename=request.GET.get('searchnote')
+    print(notename)
+    ab=[]
+    setnote=Notes.objects.filter(author=request.user,note_saved=True)
+    print(setnote)
+    for note in setnote:
+     print(note)
+     m=re.search(notename,note.note)
+     if m:
        ab.append(note)
    
-   print(ab)
-   return render(request, 'search.html', {'notes': ab})
+    print(ab)
+    return render(request, 'search.html', {'notes': ab})
+   else:
+    return redirect('/todo/notes/')
+
